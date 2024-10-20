@@ -38,12 +38,6 @@
 START_DIR="$(pwd)"
 
 
-ACCIO=""
-[ -n "$(echo $@ | grep "altinstall")" ] \
-    && ACCIO="altinstall"
-[ -z "${ACCIO}" ] \
-    && ACCIO="createdeb"
-
 MAINTAINER_NAME="berbascum"
 MAINTAINER_EMAIL="${MAINTAINER_NAME}@ticv.cat"
 
@@ -51,8 +45,15 @@ PYTHON_MAIN_VER="3.9"
 PYTHON_SUB_VER="20"
 PYTHON_MAIN_FULL_VER="${PYTHON_MAIN_VER}.${PYTHON_SUB_VER}"
 PYTHON_DOWNLOAD="https://www.python.org/ftp/python/${PYTHON_MAIN_FULL_VER}/Python-${PYTHON_MAIN_FULL_VER}.tgz"
-
+VERSION_SUFFIX="unofficial"
+HOST_SUITE="trixie"
 APT_DEPS="wget curl build-essential libssl-dev libbz2-dev libreadline-dev libsqlite3-dev libgdbm-dev liblzma-dev tk-dev libffi-dev zlib1g-dev libncurses5-dev libnss3-dev"
+
+ACCIO=""
+[ -n "$(echo $@ | grep "altinstall")" ] \
+    && ACCIO="altinstall"
+[ -z "${ACCIO}" ] \
+    && ACCIO="createdeb"
 
 [ "${ACCIO}" == "createdeb" ] \
     && APT_DEPS_EXTRA="checkinstall"
@@ -85,7 +86,7 @@ if [ "${ACCIO}" == "createdeb" ]; then
     ## Acció per defecte
     sudo checkinstall \
         --pkgname=python${PYTHON_MAIN_VER} \
-        --pkgversion="${PYTHON_MAIN_FULL_VER}" \
+        --pkgversion="${PYTHON_MAIN_FULL_VER}.${HOST_SUITE}.${VERSION_SUFFIX}" \
         --backup=no \
         --deldoc=yes --nodoc \
         --fstrans=no --install=no \
