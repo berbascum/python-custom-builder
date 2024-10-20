@@ -1,2 +1,2 @@
 # python-deb-builder
-Aquest repositori conté eines per a compilar python en un paquet deb des de Debian.
+Aquest repositori conté eines escrites i provades en un sistema Linux Debian per a compilar python des del codi font oficial.
